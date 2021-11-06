@@ -32,12 +32,12 @@ build_pkg () {
 echo "$SSH_CONFIG_BASE64" base64 -d > ~/.ssh/config
 echo "$SSH_KEY_BASE64" | base64 -d > ~/.ssh/id_ed25519
 chmod 0600 ~/.ssh/id_ed25519
-ssh-keyscan -6 aur.vond.net > ~/.ssh/known_hosts
+ssh-keyscan aur.vond.net > ~/.ssh/known_hosts
 
 sudo pacman -Sy
 
 mkdir -p /tmp/local-repo
-rsync -e 'ssh -6' -ia aur@aur.vond.net:/opt/web-stack/aur/vond* /tmp/local-repo/
+rsync -ia aur@aur.vond.net:/opt/web-stack/aur/vond* /tmp/local-repo/
 
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo plex-media-server-plexpass
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo sedutil
@@ -148,7 +148,7 @@ EOD
 
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-utils
 
-rsync -e 'ssh -6' -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/
+rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/
 
 sleep 2
 
@@ -156,6 +156,6 @@ sudo pacman --noconfirm -Sy zfs-utils
 
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts
 
-rsync -e 'ssh -6' -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/
+rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/
 
 ### END ZFS SECTION
