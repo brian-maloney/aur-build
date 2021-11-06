@@ -1,11 +1,11 @@
 name: build-update
 on:
   workflow_dispatch:
-#   schedule:
-#     - cron: '0 0 * * *'
-#   push:
-#     branches:
-#       - main
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
 jobs:
   build_image:
     runs-on: ubuntu-latest
@@ -13,8 +13,9 @@ jobs:
       - uses: actions/checkout@v2
       - run: docker build --pull --no-cache aurutils -t aurutils
       - run: |
-          docker run -i -t --rm \
+          docker run --rm \
           -e SSH_CONFIG_BASE64="${{ secrets.SSH_CONFIG_BASE64 }}" \
           -e SSH_KEY_BASE64="${{ secrets.SSH_KEY_BASE64 }}" \
+          -e SSH_PORT="${{ secrets.SSH_PORT }}" \
           -v "${PWD}/updatepkgs.sh:/updatepkgs.sh:ro" \
           aurutils /bin/bash /updatepkgs.sh
