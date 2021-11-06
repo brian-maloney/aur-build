@@ -17,4 +17,4 @@ jobs:
           -e SSH_CONFIG_BASE64="${{ secrets.SSH_CONFIG_BASE64 }}" \
           -e SSH_KEY_BASE64="${{ secrets.SSH_KEY_BASE64 }}" \
           -v "${PWD}/updatepkgs.sh:/updatepkgs.sh:ro" \
-          aurutils /bin/bash /updatepkgs.sh
+          aurutils /usr/bin/bash /updatepkgs.sh
