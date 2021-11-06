@@ -12,9 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: docker build --pull --no-cache aurutils -t aurutils
-      - run: |
-          docker run --rm \
-          -e SSH_CONFIG_BASE64="${{ secrets.SSH_CONFIG_BASE64 }}" \
-          -e SSH_KEY_BASE64="${{ secrets.SSH_KEY_BASE64 }}" \
-          -v "${PWD}/updatepkgs.sh:/updatepkgs.sh:ro" \
-          aurutils /usr/bin/bash /updatepkgs.sh
+      - run: docker run --rm aurutils ls -alF /
+      # - run: |
+      #     docker run --rm \
+      #     -e SSH_CONFIG_BASE64="${{ secrets.SSH_CONFIG_BASE64 }}" \
+      #     -e SSH_KEY_BASE64="${{ secrets.SSH_KEY_BASE64 }}" \
+      #     -v "${PWD}/updatepkgs.sh:/updatepkgs.sh:ro" \
+      #     aurutils /bin/bash /updatepkgs.sh
