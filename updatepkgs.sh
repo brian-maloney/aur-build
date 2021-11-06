@@ -29,10 +29,10 @@ build_pkg () {
   popd
 }
 
-echo "$SSH_CONFIG_BASE64" base64 -d > ~/.ssh/config
+echo "$SSH_CONFIG_BASE64" | base64 -d > ~/.ssh/config
 echo "$SSH_KEY_BASE64" | base64 -d > ~/.ssh/id_ed25519
 chmod 0600 ~/.ssh/id_ed25519
-ssh-keyscan -p "$SSH_PORT" aur.vond.net > ~/.ssh/known_hosts
+ssh-keyscan aur.vond.net > ~/.ssh/known_hosts
 
 sudo pacman -Sy
 
