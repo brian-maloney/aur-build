@@ -16,5 +16,6 @@ jobs:
           docker run --rm \
           -e SSH_CONFIG_BASE64="${{ secrets.SSH_CONFIG_BASE64 }}" \
           -e SSH_KEY_BASE64="${{ secrets.SSH_KEY_BASE64 }}" \
+          -e SSH_PORT="${{ secrets.SSH_PORT }}" \
           -v "${PWD}/updatepkgs.sh:/updatepkgs.sh:ro" \
           aurutils /bin/bash -x /updatepkgs.sh
