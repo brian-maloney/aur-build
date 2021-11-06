@@ -1,11 +1,11 @@
 name: build-update
 on:
   workflow_dispatch:
-#   schedule:
-#     - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
 jobs:
   build_image:
     runs-on: ubuntu-latest
