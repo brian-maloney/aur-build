@@ -37,7 +37,7 @@ ssh-keyscan -p "$SSH_PORT" aur.vond.net > ~/.ssh/known_hosts
 sudo pacman -Sy
 
 mkdir -p /tmp/local-repo
-rsync -ia aur@aur.vond.net:/opt/web-stack/aur/vond* /tmp/local-repo/
+rsync -ia aur@aur.vond.net:/opt/web-stack/aur/x86_64/vond* /tmp/local-repo/
 
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo plex-media-server-plexpass
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo sedutil
@@ -148,7 +148,7 @@ EOD
 
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-utils
 
-rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/
+rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/x86_64/
 
 sleep 2
 
@@ -156,6 +156,6 @@ sudo pacman --noconfirm -Sy zfs-utils
 
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts
 
-rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/
+rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/x86_64/
 
 ### END ZFS SECTION
