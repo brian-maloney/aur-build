@@ -1,6 +1,6 @@
 FROM archlinux:base-devel AS build
 
-RUN pacman --noconfirm -Sy git signify jq pacutils devtools
+RUN pacman --noconfirm -Sy git signify jq pacutils devtools expect
 RUN useradd -m builder
 RUN cd /home/builder && su builder -c '/usr/sbin/git clone https://aur.archlinux.org/aurutils.git'
 RUN cd /home/builder/aurutils && su builder makepkg
