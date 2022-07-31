@@ -34,7 +34,7 @@ echo "$SSH_KEY_BASE64" | base64 -d > ~/.ssh/id_ed25519
 chmod 0600 ~/.ssh/id_ed25519
 ssh-keyscan -p "$SSH_PORT" aur.vond.net > ~/.ssh/known_hosts
 
-sudo pacman -Sy
+sudo pacman --noconfirm -Syu
 
 mkdir -p /tmp/local-repo
 rsync -ia aur@aur.vond.net:/opt/web-stack/aur/x86_64/vond* /tmp/local-repo/
