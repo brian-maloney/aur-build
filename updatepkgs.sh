@@ -43,7 +43,7 @@ aur sync --noconfirm --noview --repo vond --root /tmp/local-repo plex-media-serv
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo sedutil
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo nuttcp
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo splunkforwarder
-aur sync --noconfirm --noview --repo vond --root /tmp/local-repo fluent-bit
+#aur sync --noconfirm --noview --repo vond --root /tmp/local-repo fluent-bit
 
 build_pkg freeipmi --skippgpcheck
 
