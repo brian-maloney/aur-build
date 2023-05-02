@@ -43,7 +43,7 @@ aur sync --noconfirm --noview --repo vond --root /tmp/local-repo plex-media-serv
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo sedutil
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo nuttcp
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo splunkforwarder
-#aur sync --noconfirm --noview --repo vond --root /tmp/local-repo fluent-bit
+aur sync --noconfirm --noview --repo vond --root /tmp/local-repo fluent-bit
 
 build_pkg freeipmi --skippgpcheck
 
@@ -154,7 +154,7 @@ sleep 2
 
 sudo pacman --noconfirm -Sy zfs-utils
 
-aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts
+aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts || true
 
 rsync -ai /tmp/local-repo/ aur@aur.vond.net:/opt/web-stack/aur/x86_64/
 
