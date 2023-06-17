@@ -44,6 +44,7 @@ aur sync --noconfirm --noview --repo vond --root /tmp/local-repo sedutil
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo nuttcp
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo splunkforwarder
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo fluent-bit
+aur sync --noconfirm --noview --repo vond --root /tmp/local-repo python310
 
 build_pkg freeipmi --skippgpcheck
 
