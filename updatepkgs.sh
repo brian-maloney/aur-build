@@ -5,7 +5,7 @@ file_exists () {
   source ./PKGBUILD
   filename="${pkgname}-${pkgver}-${pkgrel}-x86_64.pkg.tar.zst"
   echo "Checking for $filename"
-  retcode=$(curl -o /dev/null -s -Iw '%{http_code}' "https://aur.vond.net/$filename")
+  retcode=$(curl -o /dev/null -s -Iw '%{http_code}' "https://aur.vond.net/x86_64/$filename")
   if [[ "$retcode" -lt "300" ]]
   then
     return
