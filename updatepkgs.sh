@@ -157,7 +157,23 @@ sleep 2
 
 sudo pacman --noconfirm -Sy zfs-utils
 
-aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts || true
+# Working around this while the AUR repo is not receiving updates
+# aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts || true
+
+git clone "https://aur.archlinux.org/zfs-linux-lts.git"
+pushd zfs-linux-lts
+sed -i "s/$(grep -E '^_kernelver=' PKGBUILD | cut -f 2 -d '=' | tr -d '"')/$(pacman -Q linux-lts | cut -d ' ' -f 2)/g" PKGBUILD
+if ! file_exists
+then
+  makepkg --noconfirm
+  for file in $(ls *.pkg.tar.zst)
+  do
+    cp "$file" /tmp/local-repo/
+    repo-add -n /tmp/local-repo/vond.db.tar.xz "/tmp/local-repo/$file"
+  done
+fi
+popd
+
 
 rsync --rsh="ssh -p $SSH_PORT" -ai /tmp/local-repo/ aur@aur.vond.net:/aur/x86_64/
 
