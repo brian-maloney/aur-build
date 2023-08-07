@@ -31,7 +31,6 @@ build_pkg () {
 
 sudo pacman --noconfirm -Syu
 
-echo "$SSH_CONFIG_BASE64" | base64 -d > ~/.ssh/config
 echo "$SSH_KEY_BASE64" | base64 -d > ~/.ssh/id_ed25519
 chmod 0600 ~/.ssh/id_ed25519
 ssh-keyscan -p "$SSH_PORT" aur.vond.net > ~/.ssh/known_hosts
