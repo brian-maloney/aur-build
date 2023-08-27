@@ -1,6 +1,6 @@
 FROM archlinux:base-devel AS build
 
-RUN pacman --noconfirm -Sy git signify jq pacutils devtools expect perl-json-xs
+RUN pacman --noconfirm -Syu git signify jq pacutils devtools expect perl-json-xs
 RUN useradd -m builder
 RUN cd /home/builder && su builder -c '/usr/sbin/git clone https://aur.archlinux.org/aurutils.git'
 RUN cd /home/builder/aurutils && su builder makepkg
@@ -8,7 +8,7 @@ RUN cd /home/builder/aurutils && su builder makepkg
 FROM archlinux:base-devel
 RUN mkdir /tmp/pkgs
 COPY --from=build /home/builder/aurutils/*zst /tmp/pkgs/
-RUN pacman --noconfirm -Sy sudo signify rsync openssh openssl-1.1
+RUN pacman --noconfirm -Syu sudo signify rsync openssh openssl-1.1
 RUN useradd -u 1000 -m builder && mkdir /home/builder/.ssh && chown builder:builder /home/builder/.ssh && chmod 700 /home/builder/.ssh && echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder
 RUN pacman --noconfirm -U /tmp/pkgs/*zst
 RUN rm -rf /tmp/pkgs && rm -rf /var/lib/pacman/sync/* && rm -rf /var/cache/pacman/pkg/*
