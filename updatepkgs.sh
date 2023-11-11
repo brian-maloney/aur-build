@@ -29,12 +29,15 @@ build_pkg () {
   popd
 }
 
+echo "Updating packages..."
 sudo pacman --noconfirm -Syu
 
+echo "Configuring ssh..."
 echo "$SSH_KEY_BASE64" | base64 -d > ~/.ssh/id_ed25519
 chmod 0600 ~/.ssh/id_ed25519
 ssh-keyscan -p "$SSH_PORT" aur.vond.net > ~/.ssh/known_hosts
 
+echo "Syncing aur.vond.net repo..."
 mkdir -p /tmp/local-repo
 rsync --rsh="ssh -p $SSH_PORT" -ia aur@aur.vond.net:/aur/x86_64/vond* /tmp/local-repo/
 
