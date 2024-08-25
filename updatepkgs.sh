@@ -156,12 +156,9 @@ sleep 2
 
 sudo pacman --noconfirm -Sy zfs-utils
 
-# Working around this while the AUR repo is not receiving updates
-# aur sync --noconfirm --noview --repo vond --root /tmp/local-repo zfs-linux-lts || true
-
-git clone "https://aur.archlinux.org/zfs-linux-lts.git"
+mkdir zfs-linux-lts
+cp /zfs-linux-lts/* zfs-linux-lts/
 pushd zfs-linux-lts
-sed -i "s/$(grep -E '^_kernelver=' PKGBUILD | cut -f 2 -d '=' | tr -d '"')/$(pacman -Q linux-lts | cut -d ' ' -f 2)/g" PKGBUILD
 if ! file_exists
 then
   makepkg --noconfirm
