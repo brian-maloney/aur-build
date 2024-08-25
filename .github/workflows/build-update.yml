@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: resolvectl status
       - run: echo 'aur.archlinux.org 95.216.144.15' | sudo tee -a /etc/hosts
       - run: docker build --pull --no-cache aurutils -t aurutils
       - run: |
