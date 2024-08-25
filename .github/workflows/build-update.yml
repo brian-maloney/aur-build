@@ -28,4 +28,5 @@ jobs:
           -e SSH_KEY_BASE64="${{ secrets.SSH_KEY_BASE64 }}" \
           -e SSH_PORT="${{ secrets.SSH_PORT }}" \
           -v "${PWD}/updatepkgs.sh:/updatepkgs.sh:ro" \
+          -v "${PWD}/zfs-linux-lts:/zfs-linux-lts:ro" \
           aurutils /bin/bash /updatepkgs.sh
