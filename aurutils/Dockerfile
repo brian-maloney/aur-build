@@ -1,6 +1,5 @@
 FROM archlinux:base-devel AS build
 
-RUN echo 'aur.archlinux.org 95.216.144.15' >> /etc/hosts
 RUN pacman --noconfirm -Syu git signify jq pacutils devtools expect perl-json-xs
 RUN useradd -m builder
 RUN cd /home/builder && su builder -c '/usr/sbin/git clone https://aur.archlinux.org/aurutils.git'
