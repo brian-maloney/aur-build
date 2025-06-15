@@ -43,6 +43,7 @@ aur sync --noconfirm --noview --repo vond --root /tmp/local-repo sedutil
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo nuttcp
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo splunkforwarder
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo fluent-bit
+aur sync --noconfirm --noview --repo vond --root /tmp/local-repo intel-lpmd
 
 gpg --keyserver keyserver.ubuntu.com --receive-keys cfdca245b1043cf2a5f97865ffe87404168bd847 # Pablo Galindo Salgado <pablogsal@gmail.com> for python310
 aur sync --noconfirm --noview --repo vond --root /tmp/local-repo python310
