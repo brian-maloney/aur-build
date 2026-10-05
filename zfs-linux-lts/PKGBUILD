@@ -17,7 +17,9 @@
 #
 pkgbase="zfs-linux-lts"
 pkgname=("zfs-linux-lts" "zfs-linux-lts-headers")
-_zfsver=$(curl --silent "https://api.github.com/repos/openzfs/zfs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"[^"]+-([^"]+)".*/\1/')
+# makepkg sources this file several times (build, each package function), so the version is resolved once by the caller
+# (updatepkgs.sh exports _zfsver) rather than re-querying the GitHub API each time, which can fail or be rate limited.
+_zfsver=${_zfsver:-$(curl --silent "https://api.github.com/repos/openzfs/zfs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"[^"]+-([^"]+)".*/\1/')}
 _kernelver=$(pacman -Q linux-lts | cut -d ' ' -f 2)
 _kernelver_full=$_kernelver
 _extramodules="${_kernelver}-lts"
