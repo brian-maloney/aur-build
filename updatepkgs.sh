@@ -157,6 +157,20 @@ sleep 2
 
 sudo pacman --noconfirm -Sy zfs-utils
 
+# Resolve the latest ZFS release once and export it for the PKGBUILD, which makepkg sources multiple times
+for attempt in 1 2 3 4 5; do
+  _zfsver=$(curl --silent --fail "https://api.github.com/repos/openzfs/zfs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"[^"]+-([^"]+)".*/\1/') || true
+  [[ -n "$_zfsver" ]] && break
+  echo "Failed to determine latest ZFS version (attempt $attempt), retrying..."
+  sleep $((attempt * 10))
+done
+if [[ -z "$_zfsver" ]]; then
+  echo "Unable to determine latest ZFS version" >&2
+  exit 1
+fi
+export _zfsver
+echo "Building ZFS $_zfsver"
+
 mkdir zfs-linux-lts
 cp /zfs-linux-lts/* zfs-linux-lts/
 pushd zfs-linux-lts
