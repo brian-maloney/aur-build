@@ -1,6 +1,6 @@
 FROM archlinux:base-devel AS build
 
-RUN pacman --noconfirm -Syu git signify jq pacutils devtools expect perl-json-xs
+RUN pacman --noconfirm -Syu git signify jq pacutils devtools expect perl-json-xs trurl
 RUN useradd -m builder
 RUN cd /home/builder && su builder -c '/usr/sbin/git clone https://aur.archlinux.org/aurutils.git'
 RUN cd /home/builder/aurutils && su builder makepkg
