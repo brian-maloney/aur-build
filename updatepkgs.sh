@@ -158,8 +158,12 @@ sleep 2
 sudo pacman --noconfirm -Sy zfs-utils
 
 # Resolve the latest ZFS release once and export it for the PKGBUILD, which makepkg sources multiple times
+# Authenticate when a token is available: unauthenticated API calls are limited to 60/hour per IP,
+# which shared GitHub Actions runner IPs routinely exhaust
+_gh_auth=()
+[[ -n "${GITHUB_TOKEN:-}" ]] && _gh_auth=(-H "Authorization: Bearer $GITHUB_TOKEN")
 for attempt in 1 2 3 4 5; do
-  _zfsver=$(curl --silent --fail "https://api.github.com/repos/openzfs/zfs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"[^"]+-([^"]+)".*/\1/') || true
+  _zfsver=$(curl --silent --show-error --fail "${_gh_auth[@]}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/openzfs/zfs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"[^"]+-([^"]+)".*/\1/') || true
   [[ -n "$_zfsver" ]] && break
   echo "Failed to determine latest ZFS version (attempt $attempt), retrying..."
   sleep $((attempt * 10))
